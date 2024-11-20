@@ -9,7 +9,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <title>Contrasenyes segures</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <script src="js/zxcvbn.js" type="text/javascript"></script>    
     <script>
         function Iniciar() {
             window.alert("Password: " + document.getElementById("password").value);
@@ -28,42 +28,47 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             for (i = 0; i < password.length; i++) {
                 lletra = password.charAt(i);
                 if (isNaN(lletra) && (lletra.toUpperCase() === lletra.toLowerCase())) {
-                    document.getElementById("Quinta").checked = true;
+                    document.getElementById("caracterEspecial").checked = true;
                 } else if (!isNaN(lletra)) {
                     document.getElementById("Cuarta").checked = true;
                 } else if (lletra === lletra.toUpperCase()) {
                     document.getElementById("majuscula").checked = true;
                 } else if (lletra === lletra.toLowerCase()) {
-                    document.getElementById("Tercera").checked = true;
+                    document.getElementById("minuscula").checked = true;
                 }
             }
                                              
             base = 0;
             exponente = password.length;
             if (document.getElementById("Cuarta").checked) {base = base + 10;}
-            if (document.getElementById("majuscula").checked) {base = base + 10;}
-            if (document.getElementById("Tercera").checked) {base = base + 40;}
-            if (document.getElementById("Quinta").checked) {base = base + 41;}
+            if (document.getElementById("majuscula").checked) {base = base + 40;}
+            if (document.getElementById("minuscula").checked) {base = base + 40;}
+            if (document.getElementById("caracterEspecial").checked) {base = base + 41;}
             calcul = base * exponente / 16;  
             window.alert("Calcul: " + calcul);
            
            Costcomputacional = Math.pow(base, exponente) / 1e6;
            robustesa= 0;
-                if (Costcomputacional < 1e3) {
-                        robustesa=0; 
-                    } else if (Costcomputacional < 1e6) {
-                         robustesa=1;
-                    } else if (Costcomputacional < 1e8) {
-                        robustesa=2;
-                    } else if (Costcomputacional < 1e10) {
-                        robustesa=3;
-                    }
+           
+           if (Costcomputacional < 1e3) {
+                robustesa=0; 
+                window.alert("Calucl1");
+           } else if (Costcomputacional < 1e6) {
+                robustesa=1;
+                window.alert("Calucl2");
+           } else if (Costcomputacional < 1e8) {
+                robustesa=2;
+                window.alert("Calucl3");
+           } else if (Costcomputacional < 1e10) {
+                robustesa=3;
+                window.alert("Calucl4");
+           }
             calculanys= Costcomputacional / (365*24*60*60);
             calculdies =  Costcomputacional / (24*60*60);
             window.alert( "Password: " + document.getElementById("password").value + 
-                    "\n\ - " + Costcomputacional + "\n\ - " + robustesa +  
+                    "\n\ - " + "Els cost computacional es: " + Costcomputacional + "\n\ - " +"El nivell de robustesa es: " + robustesa +  
                     "\n\ - " + " els anys que s'usarien per esbrinar la teva contrasenya serien: " + calculanys + 
-                    "\n\ - " + calculdies);
+                    "\n\ - " + "El dies per esbrinarla es: " + calculdies);
         
         }
         
@@ -79,9 +84,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
     <p> <input type="checkbox" id="minimcar" disabled> Mínim 8 caràcters, </p>
     <p> <input type="checkbox" id="majuscula" disabled> Almenys una lletra majúscula, </p>
-    <p> <input type="checkbox" id="Tercera" disabled> almenys una lletra minúscula, </p>
+    <p> <input type="checkbox" id="minuscula" disabled> almenys una lletra minúscula, </p>
     <p> <input type="checkbox" id="Cuarta" disabled> almenys un número, </p>
-    <p> <input type="checkbox" id="Quinta" disabled> almenys un carácter especial. </p>
+    <p> <input type="checkbox" id="caracterEspecial" disabled> almenys un carácter especial. </p>
    
     <p> Dèbil - Regular - Bona - Forta </p>
     <p> Weak - So-so - Great! - Strong </p>
