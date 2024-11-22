@@ -9,6 +9,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <title>Contrasenyes segures</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style> 
+        #Idioma { position:relative; top:-474px; left:150px;}
+            </style> 
+
+
     <script src="js/zxcvbn.js" type="text/javascript"></script>
     
     <script>
@@ -76,15 +81,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <a href:"https://superlative--cat--b0e6bc-netlify-app.translate.goog/?_x_tr_sl=auto&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=wapp" id="es" title= "en Español"> <img src="img/es.png" alt=""/> </a>
         
     }
-        <style> 
-        #Idioma { position:relative; top:-474px; left:150px;}
-
     </script>
 </head>
 
 <body>
     <img src="img/logo-centre.jpg" alt="" />
-    <button type="button" id="es" onclick="Idioma();"> <img src="img/es.png" alt=""/> </button> 
+    <button type="button" id="Idioma" onclick="Idioma();"> <img src="img/es.png" alt=""/> </button> 
     <p>Usuari o correu: <input type="text" name="Usuario"> </p>
     <p>Contrasenya: <input type="password" id="password" onchange="Comprovar();" required></p>
     <p> <button type="button" id="inicisessio" onclick="Iniciar();"> Inciar sessió</button> </p>
