@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+
+<head>
+    <title>Contrasenyes segures</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        function Iniciar() {
+            window.alert("Password: " + document.getElementById("password").value);
+        }
+        function Comprovar() {
+            window.alert("Comprovar");
+            var password =
+                document.getElementById("password").value;
+            //Comprovam la mida minima
+            if (password.length >= 8) {
+                document.getElementById("minimcar").checked = true;
+            }
+            for (i = 0; i < password.length; i++) {
+                lletra = password.charAt(i);
+                if (isNaN(lletra) && lletra.toUpperCase() === lletra.toLowerCase()) {
+                    console.log(".");
+                    document.getElementById("Quinta").checked = true; 
+                } else if (!isNaN(lletra)) {
+                    document.getElementById("Cuarta").checked = true;
+                } else if (lletra === lletra.toUpperCase()) {
+                    document.getElementById("majuscula").checked = true;
+                } else if (lletra === lletra.toLowerCase()) {
+                    document.getElementById("Tercera").checked = true;
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <img src="img/logo-centre.jpg" alt="" />
+    <p>Usuari o correu: <input type="text" name="Usuario"> </p>
+    <p>Contrasenya: <input type="password" id="password" onchange="Comprovar();" required></p>
+    <p> <button type="button" id="inicisessio" onclick="Iniciar();"> Inciar sessió</button> </p>
+
+    <p> <input type="checkbox" id="minimcar" disabled> Mínim 8 caràcters, </p>
+    <p> <input type="checkbox" id="majuscula" disabled> Almenys una lletra majúscula, </p>
+    <p> <input type="checkbox" id="Tercera" disabled> almenys una lletra minúscula, </p>
+    <p> <input type="checkbox" id="Cuarta" disabled> almenys un número, </p>
+    <p> <input type="checkbox" id="Quinta" disabled> almenys un carácter especial. </p>
+
+    <p> Dèbil - Regular - Bona - Forta </p>
+    <p> Weak - So-so - Great! - Strong </p>
+</body>
+
+</html>
