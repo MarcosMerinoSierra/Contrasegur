@@ -426,72 +426,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<progress id="robustesa" value="0" max="4" onclick="Iniciar();"></progress><br>
     <p> Weak - So-so - Great! - Strong </p>
     
-    <input type="file" id="fileinput"/>
-    <script type="text/javascript">
-    function readSingleFile(evt) {
-    //Retrieve the first (and only!) File from the FileList object
-    var f = evt.target.files[0]; 
-
-    if (f) {
-      var r = new FileReader();
-      r.onload = function(e) { 
-	      var contents = e.target.result;
-        
-              
-        alert( "Got the file.n" 
-              +"name: " + f.name + "n"
-              +"type: " + f.type + "n"
-              +"size: " + f.size + " bytesn"
-              + "starts with: " + contents.substr(0, contents.indexOf("\n"))
-        );  
-        stream1 = contents.replaceAll("\n", ", ");
-        
-        alert (stream1);
-      }
-      r.readAsText(f);
-    } else { 
-      alert("Failed to load file");
-    }
-  }
-
-  document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
-    </script>
-    <p><input type="file" id="patroninput"/> </p>
+    <input type="file" id="diccionari"/>
+    <input type="file" id="patrons"/> 
     <script>
- function leerPatrons(evt) {
-    //Retrieve the first (and only!) File from the FileList object
-    var f = evt.target.files[0]; 
-
-    if (f) {
-      var r = new FileReader();
-      r.onload = function(e) { 
-	      var contents = e.target.result;
-        
-              
-        alert( "Got the file.n" 
-              +"name: " + f.name + "n"
-              +"type: " + f.type + "n"
-              +"size: " + f.size + " bytesn"
-              + "starts with: " + contents.substr(0, contents.indexOf("\r\n"))
-        ); 
-
-
-        stream1 = contents.replaceAll("\r\n", ", ");
-        stream2 = stream1.replaceAll("/", "");
-        stream3 = stream2.split(",");
-        
-        alert(stream3);
-        
-        r.readAsText(f);
-    } else { 
-      alert("Failed to load file");
-    }
-    
-  }
- }
-  document.getElementById('patroninput').addEventListener('change', leerPatrons, false);
-  
-</script> 
+   document.getElementById('diccionari').addEventListener('change', readSingleFile, false);
+   document.getElementById('patrons').addEventListener('change', readSingleFile, false);
+    </script>
+ 
 
 
 <p> </p> 
