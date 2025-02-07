@@ -13,20 +13,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <script>
         function Iniciar() {
             window.alert("Password: " + document.getElementById("password").value);
+            // window.alert("Calcul: " + calcul.value);
         }
+       
         function Comprovar() {
             window.alert("Comprovar");
-            var password =
-                document.getElementById("password").value;
+            var password = document.getElementById("password").value;
+           
             //Comprovam la mida minima
             if (password.length >= 8) {
                 document.getElementById("minimcar").checked = true;
             }
+           
             for (i = 0; i < password.length; i++) {
                 lletra = password.charAt(i);
-                if (isNaN(lletra) && lletra.toUpperCase() === lletra.toLowerCase()) {
-                    console.log(".");
-                    document.getElementById("Quinta").checked = true; 
+                if (isNaN(lletra) && (lletra.toUpperCase() === lletra.toLowerCase())) {
+                    document.getElementById("Quinta").checked = true;
                 } else if (!isNaN(lletra)) {
                     document.getElementById("Cuarta").checked = true;
                 } else if (lletra === lletra.toUpperCase()) {
@@ -35,7 +37,37 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     document.getElementById("Tercera").checked = true;
                 }
             }
+                                             
+            base = 0;
+            exponente = password.length;
+            if (document.getElementById("Cuarta").checked) {base = base + 10;}
+            if (document.getElementById("majuscula").checked) {base = base + 10;}
+            if (document.getElementById("Tercera").checked) {base = base + 40;}
+            if (document.getElementById("Quinta").checked) {base = base + 41;}
+            calcul = base * exponente / 16;  
+            window.alert("Calcul: " + calcul);
+           
+           Costcomputacional = Math.pow(base, exponente) / 1e6;
+           robustesa= 0;
+                if (Costcomputacional < 1e3) {
+                        robustesa=0; 
+                    } else if (Costcomputacional < 1e6) {
+                         robustesa=1;
+                    } else if (Costcomputacional < 1e8) {
+                        robustesa=2;
+                    } else if (Costcomputacional < 1e10) {
+                        robustesa=3;
+                    }
+            calculanys= Costcomputacional / (365*24*60*60);
+            calculdies =  Costcomputacional / (24*60*60);
+            window.alert( "Password: " + document.getElementById("password").value + 
+                    "\n\ - " + Costcomputacional + "\n\ - " + robustesa +  
+                    "\n\ - " + " els anys que s'usarien per esbrinar la teva contrasenya serien: " + calculanys + 
+                    "\n\ - " + calculdies);
+        
         }
+        
+
     </script>
 </head>
 
@@ -50,7 +82,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <p> <input type="checkbox" id="Tercera" disabled> almenys una lletra minúscula, </p>
     <p> <input type="checkbox" id="Cuarta" disabled> almenys un número, </p>
     <p> <input type="checkbox" id="Quinta" disabled> almenys un carácter especial. </p>
-
+   
     <p> Dèbil - Regular - Bona - Forta </p>
     <p> Weak - So-so - Great! - Strong </p>
 </body>
