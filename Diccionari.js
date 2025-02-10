@@ -164,7 +164,7 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
            
         const Majuscules = /[A-Z]|Ñ|Ç/;
         const Minuscules =  /[A-Z]|ñ|ç/;
-        const caracteresEspeciales = /[º\ª "@·#$~%&¬/()='¡?¿^`[*+]¨´{}-_.:,;<>Z\*-+']/;
+        const caracteresEspeciales = /[ºª"@·#$~%&¬/()='¡\?¿^`[\]*+¨´{}_.:,;<>-]/; 
         const Digitos = /[0-9]/;
            
           if (esComuna(password) === true) {
@@ -179,9 +179,9 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
               return "Te falta una minuscula, una majucula y numeros en tu contraseña";
           }
           if (!caracteresEspeciales.test(password)) {
-              return "Tu contreña a de contener por lo menos un caracter especial";
-          }
-          if (!password.length < 8 ){
+            return "Tu contraseña debe contener por lo menos un carácter especial.";
+        }
+          if (password.length < 8 ){
               return "Tu contraseña no tiene el numero de letras necesario";
           }
           return "es robusta";
