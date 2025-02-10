@@ -43,7 +43,7 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
         }
        
         function Comprovar() {
-            window.alert("Comprovar");
+            
             var password = document.getElementById("password").value;
            
             //Comprovam la mida minima
@@ -71,6 +71,9 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
             if (document.getElementById("Tercera").checked) {base = base + 40;}
             if (document.getElementById("Quinta").checked) {base = base + 41;}
             calcul = base * exponente / 16;  
+            
+        document.getElementById("calcul").value = calcul.toString();
+            
             window.alert("Calcul: " + calcul);
            
             Costcomputacional = Math.pow(base, exponente) / 1e6;
@@ -92,13 +95,13 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
                 }
             calculanys= Costcomputacional / (365*24*60*60);
             calculdies =  Costcomputacional / (24*60*60);
-                window.alert( "Password: " + document.getElementById("password").value  +
+                window.alert( "Password: " + password  +
                     "\n\ - " + "Els cost computacional es: " + Costcomputacional + "\n\ - " +"El nivell de robustesa es: " + robustesa +  
                     "\n\ - " + " els anys que s'usarien per esbrinar la teva contrasenya serien: " + calculanys +
-                    "\n\ - " + "El dies per esbrinarla es: " + calculdies + "\n\ - " + "La contrasenya a de tenir al menys un numero, una minuscula i una majuscula" + "\n\ - " 
+                    "\n\ - " + "El dies per esbrinarla es: " + calculdies +  "\n\ - " 
                     + controlContrasenya(password));
        
-            window.alert(controlContrasenya(document.getElementById("password").value));
+            // window.alert(controlContrasenya(document.getElementById("password").value));
           }
         
         
@@ -120,13 +123,14 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
         // patrons = contents.replaceAll("\r\n", ",");
         stream2 = contents.replaceAll("\r\n", ",");
         stream3 = stream2.replaceAll("/", "");
-        stream4 = stream3.split(",");
+        stream4 = stream3.split(",");      
         for (i = 0; i < stream4.length; i++) {
             patrons[i] = new RegExp(stream4[i]);
         }        
-        // alert("Patrons:" + patrons);
+         alert("Patrons:" + patrons);
       } else {
-        diccionari = contents.replaceAll("\r\n", ",");
+        stream1 = contents.replaceAll("\n", ",");
+        diccionari = stream1.split(",");
         // alert("Diccionari:" + diccionari);
       }
     }
@@ -143,20 +147,44 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
               return true;
           }
             */
-             return diccionari.includes(password);        
+             return diccionari.includes(password.toLowerCase());        
               }
           function patrones(password) {
-              
-              return patrons[i].includes(password);
-          }  
+              for (i=0; i < patrons.length; i++) {
+                if (patrons[i].test(password.toLowerCase())) {
+                  return true;
+              }
+              }
+              return false;
+              }
+            
+            
         
-       function controlContrasenya(password) {              
+       function controlContrasenya(password) {      
+           
+        const Majuscules = /[A-Z]|Ñ|Ç/;
+        const Minuscules =  /[A-Z]|ñ|ç/;
+        const caracteresEspeciales = /[º\ª "@·#$~%&¬/()='¡?¿^`[*+]¨´{}-_.:,;<>Z\*-+']/;
+        const Digitos = /[0-9]/;
+           
           if (esComuna(password) === true) {
             return "Tu contraseña es muy comun, porfavor intente cambiarla";
           }
+          
           if (patrones(password)=== true) {
               return "Tu contraseña te patrons";
           }
+          
+          if (!Minuscules.test(password) || !Majuscules.test(password) || !Digitos.test(password)) {
+              return "Te falta una minuscula, una majucula y numeros en tu contraseña";
+          }
+          if (!caracteresEspeciales.test(password)) {
+              return "Tu contreña a de contener por lo menos un caracter especial";
+          }
+          if (!password.length < 8 ){
+              return "Tu contraseña no tiene el numero de letras necesario";
+          }
+          return "es robusta";
         }
         
         
