@@ -43,7 +43,7 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
         }
        
         function Comprovar() {
-            window.alert("Comprovar");
+            
             var password = document.getElementById("password").value;
            
             //Comprovam la mida minima
@@ -101,7 +101,7 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
                     "\n\ - " + "El dies per esbrinarla es: " + calculdies +  "\n\ - " 
                     + controlContrasenya(password));
        
-            window.alert(controlContrasenya(document.getElementById("password").value));
+            // window.alert(controlContrasenya(document.getElementById("password").value));
           }
         
         
@@ -162,7 +162,7 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
         
        function controlContrasenya(password) {      
            
-        const Majuscules = /[A-Z] |Ñ|Ç/;
+        const Majuscules = /[A-Z]|Ñ|Ç/;
         const Minuscules =  /[A-Z]|ñ|ç/;
         const caracteresEspeciales = /[º\ª "@·#$~%&¬/()='¡?¿^`[*+]¨´{}-_.:,;<>Z\*-+']/;
         const Digitos = /[0-9]/;
@@ -179,7 +179,7 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
               return "Te falta una minuscula, una majucula y numeros en tu contraseña";
           }
           if (!caracteresEspeciales.test(password)) {
-              return "Tu contreña con tiene por lo menos un caracter especial";
+              return "Tu contreña a de contener por lo menos un caracter especial";
           }
           if (!password.length < 8 ){
               return "Tu contraseña no tiene el numero de letras necesario";
