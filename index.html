@@ -423,11 +423,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <p> <input type="checkbox" id="Quinta" disabled> almenys un carácter especial. </p>
    
     <p> Dèbil - Regular - Bona - Forta </p>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<progress id="robustesa" value="0" max="4" onclick="Iniciar();"></progress><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<progress id="calcul" value="0" max="100" "></progress><br>
     <p> Weak - So-so - Great! - Strong </p>
-    
-    <input type="file" id="diccionari"/>
+    <a href="https://en.wikipedia.org/wiki/List_of_the_most_common_passwords"> Diccionari</a>
+    <input type="file" id="diccionari"/> <p> </p>
+    <a href="https://en.wikipedia.org/wiki/QWERTY"> Patrons </a>
     <input type="file" id="patrons"/> 
+
     <script>
    document.getElementById('diccionari').addEventListener('change', readSingleFile, false);
    document.getElementById('patrons').addEventListener('change', readSingleFile, false);
