@@ -5,7 +5,7 @@
 
 
 // var diccionari = new Array(["password", "123456", "123456789", "guest", "qwerty", "12345678", "111111", "12345"]);
-var diccionari = new set (["password", "guest", "dragon", "baseball", "football", "monkey", "letmein", "696969",
+ var diccionari = new Set ([ "password", "guest", "dragon", "baseball", "football", "monkey", "letmein", "696969",
     "shadow", "master", "mustang", "michael", "pussy", "superman", "fuckyou", "121212", "killer", "trustno1", "jordan",
     "jennifer", "hunter", "buster", "soccer", "harley", "batman", "tigger", "sunshine", "iloveyou", "fuckme", "charlie",
     "thomas", "hockey", "ranger", "daniel", "starwars", "klaster", "112233", "george", "asshole", "computer", "michelle",
@@ -19,7 +19,7 @@ var diccionari = new set (["password", "guest", "dragon", "baseball", "football"
     "eagles", "melissa", "boomer", "booboo", "spider", "nascar", "monster", "tigers", "yellow", "gateway", "marina",
     "diablo", "bulldog", "compaq", "purple", "hardcore", "banana", "junior", "hannah", "porsche", "lakers", "iceman",
     "money", "cowboys", "london", "tennis", "ncc1701", "coffee", "scooby", "miller", "boston", "q1w2e3r4", "fuckoff",
-    "brandon", "yamaha", "chester", "mother", "forever", "johnny", "edward", "oliver", "redsox", "player", "nikita"]);
+    "brandon", "yamaha", "chester", "mother", "forever", "johnny", "edward", "oliver", "redsox", "player", "nikita"]); 
 
 // var patrons = ["/123/", "/abc/", "/qwerty/"];
 var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /321/, /345/, /3ed/, /432/, /456/,
@@ -63,8 +63,12 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
                     document.getElementById("Tercera").checked = true;
                 }
             }
-                                             
+        }
+        
+        function mensaje() {
+            var password = document.getElementById("password").value;
             base = 0;
+            
             exponente = password.length;
             if (document.getElementById("Cuarta").checked) {base = base + 10;}
             if (document.getElementById("majuscula").checked) {base = base + 40;}
@@ -102,8 +106,14 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
                     + controlContrasenya(password));
        
             // window.alert(controlContrasenya(document.getElementById("password").value));
+            if(confirm("Vol desar l'inici de sessio?")) {
+    localStorage.setItem("Uusario", document.getElementById("Usuario").value);
+    localStorage.setItem("password", document.getElementById("password").value);
+    const myWindow = window.open("desa.html", "_blank", "width=460, height=600, left=0, top=0, \n\
+\n\ location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0");
+}
           }
-        
+          
         
         
    function readSingleFile(evt) {
@@ -150,16 +160,21 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
               return true;
           }
             */
+          
              return diccionari.has(password.toLowerCase());        
               }
+              
           function patrones(password) {
+              
               for (i=0; i < patrons.length; i++) {
+                 
                 if (patrons[i].test(password.toLowerCase())) {
                   return true;
               }
               }
               return false;
               }
+              
             
             
         
@@ -170,25 +185,23 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
         const caracteresEspeciales = /[º\ª "@·#$~%&¬/()='¡?¿^`[*+]¨´{}-_.:,;<>Z\*-+']/;
         const Digitos = /[0-9]/;
            
-          if (esComuna(password) === true) {
+          if (esComuna(password)) {
             return "Tu contraseña es muy comun, porfavor intente cambiarla";
           }
           
-          if (patrones(password)=== true) {
+          if (patrones(password)) {
               return "Tu contraseña te patrons";
           }
           
           if (!Minuscules.test(password) || !Majuscules.test(password) || !Digitos.test(password)) {
               return "Te falta una minuscula, una majucula y numeros en tu contraseña";
           }
+         
           if (!caracteresEspeciales.test(password)) {
               return "Tu contreña a de contener por lo menos un caracter especial";
           }
-          if (!password.length < 8 ){
+          if (!password.length < 8){
               return "Tu contraseña no tiene el numero de letras necesario";
           }
           return "es robusta";
         }
-        
-        
-    
