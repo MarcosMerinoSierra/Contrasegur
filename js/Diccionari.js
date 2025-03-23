@@ -63,12 +63,8 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
                     document.getElementById("Tercera").checked = true;
                 }
             }
-        }
-        
-        function mensaje() {
-            var password = document.getElementById("password").value;
+                                             
             base = 0;
-            
             exponente = password.length;
             if (document.getElementById("Cuarta").checked) {base = base + 10;}
             if (document.getElementById("majuscula").checked) {base = base + 40;}
@@ -106,14 +102,9 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
                     + controlContrasenya(password));
        
             // window.alert(controlContrasenya(document.getElementById("password").value));
-            if(confirm("Vol desar l'inici de sessio?")) {
-    localStorage.setItem("Uusario", document.getElementById("Usuario").value);
-    localStorage.setItem("password", document.getElementById("password").value);
-    const myWindow = window.open("desa.html", "_blank", "width=460, height=600, left=0, top=0, \n\
-\n\ location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0");
-}
+            
           }
-          
+        
         
         
    function readSingleFile(evt) {
@@ -205,3 +196,8 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
           }
           return "es robusta";
         }
+
+
+        
+ 
+
