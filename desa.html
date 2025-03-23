@@ -10,15 +10,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <script>   
-function setCookie(Usuario, password, exdays) {
-  const d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  let expires = "expires="+d.toUTCString();
-  document.cookie = Usuario + "=" + password + ";" + expires + ";path=/";
+function resetCookies() {
+  document.cookie = '';
 }
 
-function getCookie(cname) {
-  let name = Usuario + "=";
+function setCookie(clave, valor, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = " expires="+d.toUTCString();
+  let cookie = clave + "=" + valor + ";" + expires + "; path=/";
+  document.cookie = cookie;
+  console.log(document.cookie);
+}
+
+function getCookie(clave) {
+  let name = clave + "=";
   let ca = document.cookie.split(';');
   for(let i = 0; i < ca.length; i++) {
     let c = ca[i];
@@ -43,18 +49,66 @@ function checkCookie() {
     }
   }
 }
-function inici () {
-    document.getElement.byId("Usuario").value === getItem("Usuario").localStorage;
-    document.getElement.byId("password").value === getItem("password").localStorage;
+
+function Desar() {
+    let usuario = document.getElementById("Usuario").value;
+    let password = document.getElementById("password").value;
+    
+    if (usuario && password) {
+        let confirmar = confirm(`Quieres guardar tu\nUsuario: ${usuario}\nContraseña: ${password}`);
+        var existe = getCookie(usuario);
+        console.log("-->" + existe);
+        if (existe !== '') {
+          alert("el usuario Ya existe");
+        }
+        if (confirmar) {
+            setCookie(usuario, password, 365);
+            alert("Usuario y contraseña se han guardado.");
+        } 
+    } 
+  }
+
+  function verTuContraseña() {
+    var listaStr = document.cookie;
+    var lista = listaStr.split(";");
+    const myWindow = window.open("", "_blank", "width=450, height=500, left=0, top=0, \n\
+                location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0");
+      myWindow.document.open();
+    myWindow.document.write(`
+          <html>
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          </head>
+          <body>
+              <table border="1">
+                <tr><td>>Usuari o correu:</td><td>Contrasenya</td>`); 
+                
+                for (let i=0; i < lista.length; i++) {
+                  myWindow.document.write("<tr><th>" + lista[i].split("=")[0] + "</th><th>" + lista[i].split("=")[1] + "</th></tr>");
+                }
+    myWindow.document.write(`
+              </table>
+          </body>
+          </html>`);
 }
+  
+
+
+  
+
+   
+
 </script>
     </head>
     <body>
-      <p> Usuari o correu: <input type="text" name="Usuario"> </p>  
+      <p> Usuari o correu: <input type="text" id="Usuario"></p>
+      <script> document.getElementById('Usuario').value = localStorage.getItem("Usuario"); </script>
       <p> Contrasenya: <input type="password" id="password" required>  </p>
-      <button type="button" id="mostrarcontrasenyes">  Mostrar las contraseñas guardadas </button> 
+      <button type="button" id="mostrarcontrasenyes" onclick="verTuContraseña();">  Mostrar las contraseñas guardadas </button> 
+      <script> document.getElementById('password').value = localStorage.getItem("password"); </script>
         <button type="button" id="desar" onclick="Desar();"> Guardar </button> 
-       <button type="button" id="nodesar">  No guardar </button> 
-        
+        <button id="noGuardar" type="button" onclick="window.close();" value="submit">No guardar</button>  
+        <button type="button" id="reset" onclick="resetCookies();"> Reset </button> 
     </body>
 </html>

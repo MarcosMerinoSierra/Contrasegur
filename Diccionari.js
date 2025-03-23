@@ -102,11 +102,7 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
                     + controlContrasenya(password));
        
             // window.alert(controlContrasenya(document.getElementById("password").value));
-            if(confirm("Vol desar l'inici de sessio?")) {
-    localStorage.setItem("Uusario", document.getElement.byId("Usuario").value);
-    localStorage.setItem("password", document.getElement.byId("password").value);
-    const myWindow = window.open("desa.html", "_blank", "width=460, height=600, left=0, top=0, \n\ location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0");
-}
+            
           }
         
         
@@ -200,7 +196,8 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
           }
           return "es robusta";
         }
-        
+
+
         
  
 
