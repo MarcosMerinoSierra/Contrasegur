@@ -15,14 +15,36 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
      <style>
         #Idioma { position:relative; top:-474px; left:150px;}
      </style>
+     
+
+<script src="../js/alasql.js" type="text/javascript"></script>
+<script src="../js/sql.js" type="text/javascript"></script>
+<script src="../js/md5.min.js" type="text/javascript"></script>
+<script src="../js/SHA1_MD5.js" type="text/javascript"></script>
+
 </head>
+
 
 <body>
     <p> <img src="img/logo-centre.jpg" alt=""/> </p>
-    <a href="https://superlative--cat--b0e6bc-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=wapp" id="cast"> <img src="img/es.png" alt=""/> </a>
-    <a href="https://superlative--cat--b0e6bc-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp" id="ingles"> <img src="img/gb.png" alt=""/> </a>  
-    <a href="https://superlative--cat--b0e6bc-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=fr&_x_tr_hl=fr&_x_tr_pto=wapp" id="frances"> <img src="img/fr.png" alt=""/>  </a>
+    <a href="https://superlative--cat--b0e6bc-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=wapp" id="es"> <img src="img/es.png" alt=""/> </a>
+    <a href="https://superlative--cat--b0e6bc-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp" id="en"> <img src="img/gb.png" alt=""/> </a>  
+    <a href="https://superlative--cat--b0e6bc-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=fr&_x_tr_hl=fr&_x_tr_pto=wapp" id="fr"> <img src="img/fr.png" alt=""/>  </a>
     <a href="https://superlative--cat--b0e6bc-netlify-app.translate.goog/?_x_tr_sl=ca&_x_tr_tl=it&_x_tr_hl=it&_x_tr_pto=wapp" id="italiano">  <img src="img/it.png" alt=""/> </a>
+   <a href="https://superlative--cat--b0e6bc-netlify-app.translate.goog/?_x_tr_sl=auto&_x_tr_tl=ca&_x_tr_hl=es&_x_tr_pto=wapp" id="ca">  <img src="img/ca.png" alt=""/> </a> 
+   <select name="Idiomes" id="Idiomes"
+       onchange="AlaWeb_SQLite(this.value)" title="Select">
+       <option value="ca" > ca </option>
+       <option value="es" > es </option>
+       <option value="en" > en </option>
+       <option value="fr" > fr </option>
+       <!--
+       <option value="de" > de> </option>
+       <option value="it" > it> </option>
+       -->
+   </select>
+   
+   
         <div id="Teclat" translate="no" hidden>
     <table id="Minus"><strong>
         <tr>

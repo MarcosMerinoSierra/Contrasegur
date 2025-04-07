@@ -34,7 +34,144 @@ var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /
     /uio/, /ujm/, /uts/, /uvw/, /uyt/, /vbn/, /vcx/, /vfr/, /vut/, /vwx/, /wer/, /wqa/, /wsx/, /wvu/, /wxc/,
     /wxy/, /xcv/, /xsw/, /xsz/, /xwv/, /xyz/, /yhn/, /ytr/, /yui/, /yxw/, /zaq/, /zer/, /zsx/, /zxc/, /zyx/];
 
+     // Diferents idiomes per la GUI
+const Idiomes_dft = [
+    {
+        "IdIdioma": "ca",
+        "Titol": "Versió amb Base de Dades Contrasenyes Segures",
+        "Username": "Usuari o correu: ",
+        "Password": "Contrasenya: ",
+        "Mostrar": "Mostrar: ",
+        "Minimcar": " Mínim 8 caràcters,",        
+        "Majuscula": " almenys una lletra majúscula,",
+        "Minuscula": " almenys una lletra minúscula,",
+        "Numero": " almenys un número,",
+        "Carespecial": " almenys un carácter especial.",
+        "Robustesa": "Dèbil - Regular - Bona - Forta",
+        "Inisessio": "Iniciar sessió",
+        "Massacomu": "La contrasenya és massa comuna. Si us plau, tria una contrasenya més forta.",
+        "Nopatrons": "La contrasenya no pot contenir patrons previsibles.",
+        "Norepmult": "La contrasenya no pot contenir repeticions múltiples de caràcters.",
+        "Majminnum": "La contrasenya ha de contenir almenys una lletra majúscula, una minúscula i un número.",
+        "Almcaresp": "La contrasenya ha de contenir almenys un caràcter especial.",
+        "Almmincar": "La contrasenya és massa curta. Ha de tenir almenys 8 caràcters.",
+        "Contrarob": "Contrasenya robusta!",        
+        "Computacional": "\n\     - Tendria un Cost Computacional per Força Bruta de: ",
+        "Maquina": " pel que una màquina a 1 MIPS podria arribar a necessitar ",
+        "Processament": " anys de processament, es a dir, ",
+        "Nivell": " dies.\n\     - Tendria un Nivell de Robustesa de: ",
+        "Score": "/4, i un zxcvbn Score de: ",
+        "Voldesar": "Vol desar l'inici de sessió?",
+        "Diccionari": "Diccionari: ",
+        "Patrons": "Patrons: ",
+        "Mostrartaula": "Mostrar taula ASCII-HTML",
+        "Amagartaula": "Amagar taula ASCII-HTML"
+    },
+    {
+        "IdIdioma": "es",
+        "Titol": "Versión con Base de Datos Contraseñas Seguras",
+        "Username": "Usuario o correo: ",
+        "Password": "Contraseña: ",
+        "Mostrar": "Mostrar: ",
+        "Minimcar": " Mínimo 8 carácteres,",        
+        "Majuscula": " almenos una letra mayúscula,",
+        "Minuscula": " almenos una letra minúscula,",
+        "Numero": " almenos un número,",
+        "Carespecial": " almenos un carácter especial.",
+        "Robustesa": "Débil - Regular - Buena - Fuerte",
+        "Inisessio": "Iniciar sesión",
+        "Massacomu": "La contraseña es demasiado común. Por favor, elige una contraseña más fuerte.",
+        "Nopatrons": "La contraseña no puede contener patrones previsibles.",
+        "Norepmult": "La contraseña no puede contener múltiples repeticiones de caracteres.",
+        "Majminnum": "La contraseña debe contener al menos una letra mayúscula, una minúscula y un número.",
+        "Almcaresp": "La contraseña debe contener al menos un carácter especial.",
+        "Almmincar": "La contraseña es demasiado corta. Debe tener al menos 8 caracteres.",
+        "Contrarob": "¡Contraseña robusta!",        
+        "Computacional": "\n\     - Tendría un Coste Computacional por Fuerza Bruta de: ",
+        "Maquina": " por lo que una máquina a 1 MIPS podría llegar a necesitar ",
+        "Processament": " años de procesamiento, es decir, ",
+        "Nivell": " días.\n\     - Tendría un Nivel de Robustez de: ",
+        "Score": "/4, y un zxcvbn Score de: ",
+        "Voldesar": "¿Quiere guardar el inicio de sesión?",
+        "Diccionari": "Diccionario: ",
+        "Patrons": "Patrones: ",
+        "Mostrartaula": "Mostrar tabla ASCII-HTML",
+        "Amagartaula": "Esconder tabla ASCII-HTML"
+    },
+    {
+        "IdIdioma": "en",
+        "Titol": "Secure Passwords Database Version",
+        "Username": "User or email: ",
+        "Password": "Password: ",
+        "Mostrar": "Show: ",
+        "Minimcar": " Minimum 8 characters,",        
+        "Majuscula": " at least one capital letter,",
+        "Minuscula": " at least one lowercase letter,",
+        "Numero": " at least one number,",
+        "Carespecial": " at least one special character.",
+        "Robustesa": "Weak - Fair - Good - Strong",
+        "Inisessio": "Log in",
+        "Massacomu": "The password is too common. Please choose a stronger password.",
+        "Nopatrons": "Password cannot contain predictable patterns.",
+        "Norepmult": "The password cannot contain multiple repetitions of characters.",
+        "Majminnum": "Password must contain at least one uppercase letter, one lowercase letter, and one number.",
+        "Almcaresp": "Password must contain at least one special character.",
+        "Almmincar": "The password is too short. It must be at least 8 characters long.",
+        "Contrarob": "Strong password!",        
+        "Computacional": "\n\     - It would have a Brute Force Computational Cost of: ",
+        "Maquina": " for what a 1 MIPS machine might need ",
+        "Processament": " years of processing, that is, ",
+        "Nivell": " days.\n\     - It would have a Robustness Level of: ",
+        "Score": "/4, and a zxcvbn Score of: ",
+        "Voldesar": "Do you want to save your login?",
+        "Diccionari": "Dictionary: ",
+        "Patrons": "Patterns: ",
+        "Mostrartaula": "Show ASCII-HTML table",
+        "Amagartaula": "Hide ASCII-HTML table"
+    }
+];
+var Idiomes = Idiomes_dft;
+var Idioma = Idiomes.find(Idioma => Idioma.IdIdioma == "ca");
 
+
+// Funció per carregar la base de dades ContraSegur.db
+function AlaWeb_SQLite(IdIdioma) {
+     window.alert("AlaWeb_SQLite IdIdioma = '" + IdIdioma + "'");
+    config = {
+        locateFile: filename => `/dist/${filename}`
+    };
+    // The `initSqlJs` function is globally provided by all of the main dist files if loaded in the browser.
+    // We must specify this locateFile function if we are loading a wasm file from anywhere other than the
+    // current html page's folder.
+
+    // Recuperam de la base de dades els TextosGUI per tots els Idiomes
+    // SELECT * FROM TblTextosGUI;
+    alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
+            SELECT * FROM TblTextosGUI;',
+            [], function(idiomes) {Print_Data(TblTextosGUI = idiomes.pop());}
+     //     [], function(idiomes) {SQL_TextosGUI(IdIdioma, idiomes.pop());}
+    );
+}
+
+        
+    // Print data  
+function Print_Data(res) {
+    window.alert("hola");
+    for (var i in res)
+    {
+       // console.log("row " + i);
+       // document.getElementById("res").innerHTML += "<br>";
+       for (var j in res[i])
+         {
+          // console.log(" " + res[i][j]);
+          // document.getElementById("res").innerHTML += res[i][j] + ", ";
+          window.alert("res[" + i + "][" +j + "] = " + res[i][j]);
+         }
+    }
+}   
+
+     
+  
 
 
         function Iniciar() {
