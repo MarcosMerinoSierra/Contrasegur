@@ -70,7 +70,7 @@ const Idiomes_dft = [
     {
         "IdIdioma": "es",
         "Titol": "Versión con Base de Datos Contraseñas Seguras",
-        "Username": "Usuario o correo: ",
+        "Username": "Username o correo: ",
         "Password": "Contraseña: ",
         "Mostrar": "Mostrar: ",
         "Minimcar": " Mínimo 8 carácteres,",        
@@ -100,9 +100,9 @@ const Idiomes_dft = [
     },
     {
         "IdIdioma": "en",
-        "Titol": "Secure Passwords Database Version",
+        "Titol": "Secure passwords Database Version",
         "Username": "User or email: ",
-        "Password": "Password: ",
+        "Password": "password: ",
         "Mostrar": "Show: ",
         "Minimcar": " Minimum 8 characters,",        
         "Majuscula": " at least one capital letter,",
@@ -112,10 +112,10 @@ const Idiomes_dft = [
         "Robustesa": "Weak - Fair - Good - Strong",
         "Inisessio": "Log in",
         "Massacomu": "The password is too common. Please choose a stronger password.",
-        "Nopatrons": "Password cannot contain predictable patterns.",
+        "Nopatrons": "password cannot contain predictable patterns.",
         "Norepmult": "The password cannot contain multiple repetitions of characters.",
-        "Majminnum": "Password must contain at least one uppercase letter, one lowercase letter, and one number.",
-        "Almcaresp": "Password must contain at least one special character.",
+        "Majminnum": "password must contain at least one uppercase letter, one lowercase letter, and one number.",
+        "Almcaresp": "password must contain at least one special character.",
         "Almmincar": "The password is too short. It must be at least 8 characters long.",
         "Contrarob": "Strong password!",        
         "Computacional": "\n\     - It would have a Brute Force Computational Cost of: ",
@@ -136,7 +136,7 @@ var Idioma = Idiomes.find(Idioma => Idioma.IdIdioma == "ca");
 
 // Funció per carregar la base de dades ContraSegur.db
 function AlaWeb_SQLite(IdIdioma) {
-     window.alert("AlaWeb_SQLite IdIdioma = '" + IdIdioma + "'");
+   // window.alert("AlaWeb_SQLite IdIdioma = '" + IdIdioma + "'");
     config = {
         locateFile: filename => `/dist/${filename}`
     };
@@ -148,15 +148,16 @@ function AlaWeb_SQLite(IdIdioma) {
     // SELECT * FROM TblTextosGUI;
     alasql('ATTACH SQLITE DATABASE contrasegur("db/ContraSegur.db"); USE contrasegur; \n\
             SELECT * FROM TblTextosGUI;',
-            [], function(idiomes) {Print_Data(TblTextosGUI = idiomes.pop());}
-     //     [], function(idiomes) {SQL_TextosGUI(IdIdioma, idiomes.pop());}
+     //       [], function(idiomes) {Print_Data(TblTextosGUI = idiomes.pop());}
+          [], function(idiomes) {SQL_TextosGUI(IdIdioma, idiomes.pop());}
     );
+    
 }
+
 
         
     // Print data  
 function Print_Data(res) {
-    window.alert("hola");
     for (var i in res)
     {
        // console.log("row " + i);
@@ -165,17 +166,45 @@ function Print_Data(res) {
          {
           // console.log(" " + res[i][j]);
           // document.getElementById("res").innerHTML += res[i][j] + ", ";
-          window.alert("res[" + i + "][" +j + "] = " + res[i][j]);
+          // window.alert("res[" + i + "][" +j + "] = " + res[i][j]);
          }
     }
 }   
 
-     
+function SQL_TextosGUI(IdIdioma, TblTextosGUI){
+    Idiomes = TblTextosGUI;
+    // window.alert("Hola");
+    if (Idiomes.length === 0) {Idiomes = Idiomes_dft;};
+       // window.alert("Hola2");
+
+    if (Idiomes.find(Idioma => Idioma.IdIdioma === IdIdioma) === undefined) { 
+        window.alert("GUI: Idioma no trobat / Idioma no encontrado / Language not found!");
+ 
+        Idiomes = Idiomes_dft;
+    };
+       // window.alert("Hola3");
+
+}
+  function CanviarIdioma(IdIdioma) {
+      AlaWeb_SQLite(IdIdioma);
+      Idioma = Idiomes.find(Idioma => Idioma.IdIdioma === IdIdioma);
+      // window.alert("Idioma.IdIdioma == IdIdioma");
+      document.title = Idioma.Titol;
+      document.getElementById("Username").innerHTML = Idioma.Username;
+      document.getElementById("Password").innerHTML = Idioma.Password;
+      
+      
+  }   
   
-
-
+function SQL_Diccionari (IdIdioma, TblDiccionari) {
+   
+   for (i = 0; i === TblDiccionari.length; i++) {
+            
+        }        
+    
+}
         function Iniciar() {
-            window.alert("Password: " + document.getElementById("password").value);
+            window.alert("password: " + document.getElementById("password").value);
             // window.alert("Calcul: " + calcul.value);
         }
        
@@ -236,15 +265,14 @@ function Print_Data(res) {
                 }
             calculanys= Costcomputacional / (365*24*60*60);
             calculdies =  Costcomputacional / (24*60*60);
-                window.alert( "Password: " + password  +
-                    "\n\ - " + "Els cost computacional es: " + Costcomputacional + "\n\ - " +"El nivell de robustesa es: " + robustesa +  
-                    "\n\ - " + " els anys que s'usarien per esbrinar la teva contrasenya serien: " + calculanys +
-                    "\n\ - " + "El dies per esbrinarla es: " + calculdies +  "\n\ - " 
+                window.alert( "password: " + password  +
+                     Idioma.Computacional + Costcomputacional +  Idioma.Nivell + robustesa +  
+                    Idioma.Maquina + calculanys + Idioma.Processament + calculdies + Idioma.Score + calcul +  "\n\ - "
                     + controlContrasenya(password));
        
             // window.alert(controlContrasenya(document.getElementById("password").value));
             if(confirm("Vol desar l'inici de sessio?")) {
-    localStorage.setItem("Usuario", document.getElementById("Usuario").value);
+    localStorage.setItem("username", document.getElementById("username").value);
     localStorage.setItem("password", document.getElementById("password").value);
     const myWindow = window.open("desa.html", "_blank", "width=460, height=600, left=0, top=0, \n\
 \n\ location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0");
