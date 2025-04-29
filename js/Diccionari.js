@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
  */
 
-
+var diccionari = new Set ();
 // var diccionari = new Array(["password", "123456", "123456789", "guest", "qwerty", "12345678", "111111", "12345"]);
- var diccionari = new Set ([ "password", "guest", "dragon", "baseball", "football", "monkey", "letmein", "696969",
+/*
+var diccionari = new Set ([ "password", "guest", "dragon", "baseball", "football", "monkey", "letmein", "696969",
     "shadow", "master", "mustang", "michael", "pussy", "superman", "fuckyou", "121212", "killer", "trustno1", "jordan",
     "jennifer", "hunter", "buster", "soccer", "harley", "batman", "tigger", "sunshine", "iloveyou", "fuckme", "charlie",
     "thomas", "hockey", "ranger", "daniel", "starwars", "klaster", "112233", "george", "asshole", "computer", "michelle",
@@ -20,7 +21,7 @@
     "diablo", "bulldog", "compaq", "purple", "hardcore", "banana", "junior", "hannah", "porsche", "lakers", "iceman",
     "money", "cowboys", "london", "tennis", "ncc1701", "coffee", "scooby", "miller", "boston", "q1w2e3r4", "fuckoff",
     "brandon", "yamaha", "chester", "mother", "forever", "johnny", "edward", "oliver", "redsox", "player", "nikita"]); 
-
+*/
 // var patrons = ["/123/", "/abc/", "/qwerty/"];
 var patrons = [/098/, /0pm/, /0pñ/, /123/, /1aq/, /1qa/, /234/, /2ws/, /2zs/, /321/, /345/, /3ed/, /432/, /456/,
     /4rf/, /543/, /567/, /5tg/, /654/, /678/, /6yh/, /765/, /789/, /7uj/, /876/, /890/, /8ik/, /987/, /9ol/,
@@ -196,13 +197,29 @@ function SQL_TextosGUI(IdIdioma, TblTextosGUI){
       
   }   
   
-function SQL_Diccionari (IdIdioma, TblDiccionari) {
-   
-   for (i = 0; i === TblDiccionari.length; i++) {
-            
-        }        
-    
+function SQL_Diccionari(TblDiccionari) {
+    //  window.alert("SQL_Diccionari IdIdioma = '" + IdIdioma + "'");    
+    Diccionari.clear();
+    SqlDiccionari = [];
+    for (var i in TblDiccionari) {
+        // console.log("TblDiccionari[" + i + "].Password: " + TblDiccionari[i].Password);
+        Diccionari.add(TblDiccionari[i].Password);  
+        SqlDiccionari[i] = TblDiccionari[i].Password;
+    }
+     // window.alert(Diccionari.size);  
+    // if (Diccionari.length == 0) {
+    if (Diccionari.size == 0) {
+        window.alert("Idioma sense contrasenyes / Idioma sin contraseñas / Language without passwords!");
+        Diccionari = Diccionari_dft;
+        IdIdioma = "ca";
+        IdIdioma_ant = "ca";
+        
+    } else {
+        // window.alert("Contrasenyes en idioma / Contraseñas en idioma / Language passwords = '" + IdIdioma + "'");
+    };
+    // window.alert(TblDiccionari[0].Password);
 }
+
         function Iniciar() {
             window.alert("password: " + document.getElementById("password").value);
             // window.alert("Calcul: " + calcul.value);
@@ -230,6 +247,7 @@ function SQL_Diccionari (IdIdioma, TblDiccionari) {
                 }
             }
         }
+      
         
         function mensaje() {
             var password = document.getElementById("password").value;
@@ -370,3 +388,4 @@ function SQL_Diccionari (IdIdioma, TblDiccionari) {
           }
           return "es robusta";
         }
+        
