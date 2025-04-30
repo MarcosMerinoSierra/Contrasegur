@@ -262,7 +262,7 @@ function SQL_Diccionari(TblDiccionari) {
             
         document.getElementById("calcul").value = calcul.toString();
             
-            window.alert("Calcul: " + calcul);
+            // window.alert("Calcul: " + calcul);
            
             Costcomputacional = Math.pow(base, exponente) / 1e6;
             robustesa=0;
