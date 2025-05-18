@@ -396,7 +396,7 @@ function SQL_Diccionari(TblDiccionari) {
                 return;
             }
         
-            let sql = 'CREATE TABLE IF NOT EXISTS diccionari (paraula TEXT);\n';
+            let sql = 'CREATE TABLE IF NOT EXISTS diccionari (Password TEXT);\n';
             
             diccionari.forEach(p => {
                 const safe = p.replace(/'/g, "''");  // Escapar comillas simples
