@@ -388,31 +388,36 @@ function SQL_Diccionari(TblDiccionari) {
   }
 }
 
- 
 
-        function importarDiccionari() {
-            if (typeof diccionari === 'undefined' || !Array.isArray(diccionari)) {
-                alert("Diccionari no està disponible.");
-                return;
-            }
-        
-            let sql = 'CREATE TABLE IF NOT EXISTS diccionari (paraula TEXT);\n';
-            
-            diccionari.forEach(p => {
+
+    function insert(IdIdioma) {
+          const myWindow = window.open("", "_blank", "width=640,height=640,left=15,top=235,location=0,menubar=0,resizable=0,scrollbars=0,status=0,titlebar=0,toolbar=0");
+        myWindow.document.open();
+
+        myWindow.document.write(`
+            <html>
+                <head>
+                    <title>SQL INSERT TblDiccionari for SQLite Studio</title>
+                </head>
+                <body style="background-size: 640px 604px; background-image: url('img/passwordCL.png'); background-repeat: no-repeat;">
+                    <p>
+                        <a href="https://sqlitesudio.netlify.app/" target="_blank">
+                            <font size="+2">SQL UPDATE TblDiccionari for SQLite Studio IdIdioma='${IdIdioma}'</font>
+                        </a>
+                    </p>
+                    <p>DELETE FROM TblDiccionari;</p>
+        `);
+
+        diccionari.forEach(p => {
                 const safe = p.replace(/'/g, "''");  // Escapar comillas simples
-                sql += `INSERT INTO diccionari (paraula) VALUES ('${safe}');\n`;
-            });
-        
-            mostrarInsertsACrear(sql);
-            // Crear archivo .sql para descarga
-            const blob =  new Blob([sql], { type: 'text/sql' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = "diccionari.sql";
-            link.click();
-            URL.revokeObjectURL(url);
-        }
+                myWindow.document.write(`<p>INSERT INTO TblDiccionari VALUES ('${safe}', '${IdIdioma}', '${md5(safe)}','${SHA1(safe)}','AES(safe)');<\p>`);
+        });
+         myWindow.document.write(`
+                </body>
+            </html>
+        `);
+        myWindow.document.close();           
+     }
 
         function mostrarInsertsACrear(texto) {
             const nuevaVentana = window.open('', '_blank');
