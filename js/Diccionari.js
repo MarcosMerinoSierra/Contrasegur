@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
  */
 
-var diccionari = new Set ();
+var diccionari = new Array ();
 // var diccionari = new Array(["password", "123456", "123456789", "guest", "qwerty", "12345678", "111111", "12345"]);
 /*
 var diccionari = new Set ([ "password", "guest", "dragon", "baseball", "football", "monkey", "letmein", "696969",
@@ -199,18 +199,18 @@ function SQL_TextosGUI(IdIdioma, TblTextosGUI){
   
 function SQL_Diccionari(TblDiccionari) {
     //  window.alert("SQL_Diccionari IdIdioma = '" + IdIdioma + "'");    
-    Diccionari.clear();
+    diccionari.clear();
     SqlDiccionari = [];
     for (var i in TblDiccionari) {
         // console.log("TblDiccionari[" + i + "].Password: " + TblDiccionari[i].Password);
-        Diccionari.add(TblDiccionari[i].Password);  
+        diccionari.push(TblDiccionari[i].Password);  
         SqlDiccionari[i] = TblDiccionari[i].Password;
     }
      // window.alert(Diccionari.size);  
     // if (Diccionari.length == 0) {
-    if (Diccionari.size == 0) {
+    if (diccionari.size == 0) {
         window.alert("Idioma sense contrasenyes / Idioma sin contraseñas / Language without passwords!");
-        Diccionari = Diccionari_dft;
+        diccionari = Diccionari_dft;
         IdIdioma = "ca";
         IdIdioma_ant = "ca";
         
@@ -297,7 +297,59 @@ function SQL_Diccionari(TblDiccionari) {
 }
           }
           
-        
+          function esComuna(password) {
+            /*
+             for ( i=1; < diccionari.lenght; i++) {
+             if (diccionari[i] == password) {
+                return true;
+            }
+              */
+            
+               return diccionari.includes(password.toLowerCase());        
+            }
+                
+            function patrones(password) {
+                
+                for (i=0; i < patrons.length; i++) {
+                   
+                  if (patrons[i].test(password.toLowerCase())) {
+                    return true;
+                }
+                }
+                return false;
+                }
+                
+              
+              
+          
+         function controlContrasenya(password) {      
+             
+          const Majuscules = /[A-Z]|Ñ|Ç/;
+          const Minuscules =  /[A-Z]|ñ|ç/;
+          const caracteresEspeciales = /[º\ª "@·#$~%&¬/()='¡?¿^`[*+]¨´{}-_.:,;<>Z\*-+']/;
+          const Digitos = /[0-9]/;
+             
+            if (esComuna(password)) {
+              return "Tu contraseña es muy comun, porfavor intente cambiarla";
+            }
+            
+            if (patrones(password)) {
+                return "Tu contraseña te patrons";
+            }
+            
+            if (!Minuscules.test(password) || !Majuscules.test(password) || !Digitos.test(password)) {
+                return "Te falta una minuscula, una majucula y numeros en tu contraseña";
+            }
+           
+            if (!caracteresEspeciales.test(password)) {
+                return "Tu contreña a de contener por lo menos un caracter especial";
+            }
+            if (!password.length < 8){
+                return "Tu contraseña no tiene el numero de letras necesario";
+            }
+            return "es robusta";
+          }
+
         
    function readSingleFile(evt) {
   //Retrieve the first (and only!) File from the FileList object
@@ -325,7 +377,7 @@ function SQL_Diccionari(TblDiccionari) {
         stream1 = contents.replaceAll("\n", ",");
         stream2 = stream1.split(",");
         for (i = 0; i < stream2.length; i++ ) {
-            diccionari.add(stream2[i]); 
+            diccionari.push(stream2[i]); 
         }
         // alert("Diccionari:" + diccionari);
       }
@@ -336,56 +388,35 @@ function SQL_Diccionari(TblDiccionari) {
   }
 }
 
-       function esComuna(password) {
-          /*
-           for ( i=1; < diccionari.lenght; i++) {
-           if (diccionari[i] == password) {
-              return true;
-          }
-            */
-          
-             return diccionari.has(password.toLowerCase());        
-              }
-              
-          function patrones(password) {
-              
-              for (i=0; i < patrons.length; i++) {
-                 
-                if (patrons[i].test(password.toLowerCase())) {
-                  return true;
-              }
-              }
-              return false;
-              }
-              
-            
-            
+ 
+
+        function importarDiccionari() {
+            if (typeof diccionari === 'undefined' || !Array.isArray(diccionari)) {
+                alert("Diccionari no està disponible.");
+                return;
+            }
         
-       function controlContrasenya(password) {      
-           
-        const Majuscules = /[A-Z]|Ñ|Ç/;
-        const Minuscules =  /[A-Z]|ñ|ç/;
-        const caracteresEspeciales = /[º\ª "@·#$~%&¬/()='¡?¿^`[*+]¨´{}-_.:,;<>Z\*-+']/;
-        const Digitos = /[0-9]/;
-           
-          if (esComuna(password)) {
-            return "Tu contraseña es muy comun, porfavor intente cambiarla";
-          }
-          
-          if (patrones(password)) {
-              return "Tu contraseña te patrons";
-          }
-          
-          if (!Minuscules.test(password) || !Majuscules.test(password) || !Digitos.test(password)) {
-              return "Te falta una minuscula, una majucula y numeros en tu contraseña";
-          }
-         
-          if (!caracteresEspeciales.test(password)) {
-              return "Tu contreña a de contener por lo menos un caracter especial";
-          }
-          if (!password.length < 8){
-              return "Tu contraseña no tiene el numero de letras necesario";
-          }
-          return "es robusta";
+            let sql = 'CREATE TABLE IF NOT EXISTS diccionari (paraula TEXT);\n';
+            
+            diccionari.forEach(p => {
+                const safe = p.replace(/'/g, "''");  // Escapar comillas simples
+                sql += `INSERT INTO diccionari (paraula) VALUES ('${safe}');\n`;
+            });
+        
+            mostrarInsertsACrear(sql);
+            // Crear archivo .sql para descarga
+            const blob =  new Blob([sql], { type: 'text/sql' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "diccionari.sql";
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function mostrarInsertsACrear(texto) {
+            const nuevaVentana = window.open('', '_blank');
+            nuevaVentana.document.write('<pre>' + texto + '</pre>');
+            nuevaVentana.document.title = "Los datos a insertar son los siguientes: ";
         }
         

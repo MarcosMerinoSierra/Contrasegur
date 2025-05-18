@@ -11,7 +11,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         
         <script>   
 function resetCookies() {
-  document.cookie = '';
+  const cookies = document.cookie.split(";");
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i];
+    const eqPos = cookie.indexOf("=");
+    const name = eqPos > -1 ? cookie.substring(0, eqPos).trim() : cookie.trim();
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
+  alert("Cookies eliminadas correctamente.");
 }
 
 function setCookie(clave, valor, exdays) {
@@ -100,7 +107,7 @@ function Desar() {
     </head>
     <body>
       <p> Usuari o correu: <input type="text" id="Usuario"></p>
-      <script> document.getElementById('Usuario').value = localStorage.getItem("Usuario"); </script>
+      <script> document.getElementById('Usuario').value = localStorage.getItem("username"); </script>
       <p> Contrasenya: <input type="password" id="password" required>  </p>
       <button type="button" id="mostrarcontrasenyes" onclick="verTuContraseña();">  Mostrar las contraseñas guardadas </button> 
       <script> document.getElementById('password').value = localStorage.getItem("password"); </script>
