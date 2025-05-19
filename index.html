@@ -436,7 +436,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
    <p> <div id="Username"> Usuari o correu: </div> <input type="text" id="username" name="username"> </p>
 <div id="Password"> Contrasenya: </div> <input type="password" id="password" onchange="Comprovar();" required>
     <button id="teclado" onclick="document.getElementById('Teclat').hidden = !document.getElementById('Teclat').hidden;" title="mostrar o amaga"><img src="img/keyboard.png" alt=""/></button>
-   
+   <button id="showPassword" type="button" onclick="showPassword();">Mostrar</button>
+
+   <button id="generatePassword" type="button" onclick="generateAndSetPassword();"> <img src="img/generate.png" alt="" width="25"></button>
+
     <p> <button type="button" id="inicisessio" onclick="mensaje()"> Inciar sessió </button> </p>
     <p> <input type="checkbox" id="minimcar" disabled> Mínim 8 caràcters, </p>
     <p> <input type="checkbox" id="majuscula" disabled> Almenys una lletra majúscula, </p>
@@ -449,7 +452,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <p> Dèbil - Regular - Bona - Forta </p>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<progress id="calcul" value="0" max="100" "></progress><br>
     <p> Weak - So-so - Great! - Strong </p>
-    <p> <a href="https://en.wikipedia.org/wiki/List_of_the_most_common_passwords"> Diccionari  <input type="file" id="diccionari"/>  
+    <p></p> <a href="https://en.wikipedia.org/wiki/List_of_the_most_common_passwords"> Diccionari  <input type="file" id="diccionari"/>  
       <button onclick="insert(document.getElementById('Idiomes').value)"> <img src="img/update.png" style="width: 24px;" alt="">
       </button>
     </p>

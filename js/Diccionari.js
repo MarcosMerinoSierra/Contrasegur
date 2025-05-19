@@ -425,3 +425,39 @@ function SQL_Diccionari(TblDiccionari) {
             nuevaVentana.document.title = "Los datos a insertar son los siguientes: ";
         }
         
+        function showPassword() {
+              var x = document.getElementById("password");
+              if (x.type === "password") {
+                x.type = "text";
+              } else {
+                x.type = "password";
+              }
+            }
+
+            function generatePassword(length = 12) {
+    const lowercase = "abcdefghijklmnopqrstuvwxyzàèéíòóúüçñ";
+    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÈÉÍÒÓÚÜÇÑ";
+    const numbers = "0123456789";
+    const specialChars = "!@#$%^&*()_+[]{}|;:,.<>?/~`-=¡¿";
+    const allChars = lowercase + uppercase + numbers + specialChars;
+
+    function getRandomChar(set) {
+        return set[Math.floor(Math.random() * set.length)];
+    }
+
+    let Password = [
+        getRandomChar(lowercase),
+        getRandomChar(uppercase),
+        getRandomChar(numbers),
+        getRandomChar(specialChars)
+    ];
+
+    while (Password.length < length) {
+        Password.push(getRandomChar(allChars));
+    }
+
+    return Password.sort(() => Math.random() - 0.5).join('');
+}
+ function generateAndSetPassword() {
+        document.getElementById('password').value = generatePassword();
+    }
